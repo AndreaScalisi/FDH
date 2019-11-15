@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000001.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 70.98 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Arial" FONTSIZE="39" ID="TXT_1"/>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="39" ID="TXT_2"/>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="11" ID="TXT_3"/>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="14" ID="TXT_4"/>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="22" ID="TXT_5"/>
+    <TextStyle FONTFAMILY="Arial" FONTSIZE="11" ID="TXT_6"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="2481" ID="PAG_1" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="1749">
+    <PrintSpace HEIGHT="2006" HPOS="129" ID="PAG_1_PrintSpace" VPOS="168" WIDTH="1401">
+    <TextBlock HEIGHT="218" HPOS="132" ID="PAG_1_TB000001" STYLEREFS="TXT_3" VPOS="168" WIDTH="1386">
+      <TextLine HEIGHT="138" HPOS="132" ID="PAG_1_TL000001" STYLEREFS="TXT_2" VPOS="168" WIDTH="1386">
+        <String CONTENT="Pavillon" HEIGHT="134" HPOS="132" ID="PAG_1_ST000001" STYLEREFS="TXT_1" VPOS="168" WC="0.89" WIDTH="586"/>
+        <SP HPOS="718" ID="PAG_1_SP000001" VPOS="170" WIDTH="102"/>
+        <String CONTENT="de" HEIGHT="120" HPOS="820" ID="PAG_1_ST000002" STYLEREFS="TXT_2" VPOS="170" WC="0.99" WIDTH="158"/>
+        <SP HPOS="978" ID="PAG_1_SP000002" VPOS="168" WIDTH="106"/>
+        <String CONTENT="Rofian" HEIGHT="138" HPOS="1084" ID="PAG_1_ST000003" STYLEREFS="TXT_2" VPOS="168" WC="0.90" WIDTH="434"/>
+      </TextLine>
+      <TextLine HEIGHT="46" HPOS="270" ID="PAG_1_TL000002" STYLEREFS="TXT_3" VPOS="340" WIDTH="1115">
+        <String CONTENT="Médaille" HEIGHT="36" HPOS="270" ID="PAG_1_ST000004" STYLEREFS="TXT_3" VPOS="341" WC="0.99" WIDTH="198"/>
+        <SP HPOS="468" ID="PAG_1_SP000003" VPOS="340" WIDTH="29"/>
+        <String CONTENT="d'Or" HEIGHT="37" HPOS="497" ID="PAG_1_ST000005" STYLEREFS="TXT_3" VPOS="340" WC="0.99" WIDTH="101"/>
+        <SP HPOS="598" ID="PAG_1_SP000004" VPOS="341" WIDTH="30"/>
+        <String CONTENT="Exposition" HEIGHT="45" HPOS="628" ID="PAG_1_ST000006" STYLEREFS="TXT_3" VPOS="341" WC="0.99" WIDTH="251"/>
+        <SP HPOS="879" ID="PAG_1_SP000005" VPOS="343" WIDTH="33"/>
+        <String CONTENT="Universelle" HEIGHT="35" HPOS="912" ID="PAG_1_ST000007" STYLEREFS="TXT_3" VPOS="343" WC="0.99" WIDTH="262"/>
+        <SP HPOS="1174" ID="PAG_1_SP000006" VPOS="343" WIDTH="29"/>
+        <String CONTENT="de" HEIGHT="35" HPOS="1203" ID="PAG_1_ST000008" STYLEREFS="TXT_3" VPOS="343" WC="0.99" WIDTH="52"/>
+        <SP HPOS="1255" ID="PAG_1_SP000007" VPOS="341" WIDTH="31"/>
+        <String CONTENT="1900" HEIGHT="36" HPOS="1286" ID="PAG_1_ST000009" STYLEREFS="TXT_3" VPOS="341" WC="0.99" WIDTH="99"/>
+      </TextLine>
+    </TextBlock>
+    <Illustration HEIGHT="1160" HPOS="292" ID="PAG_1_IL000001" VPOS="458" WIDTH="1014"/>
+    <TextBlock HEIGHT="59" HPOS="410" ID="PAG_1_TB000002" STYLEREFS="TXT_4" VPOS="1679" WIDTH="829">
+      <TextLine HEIGHT="59" HPOS="410" ID="PAG_1_TL000003" STYLEREFS="TXT_4" VPOS="1679" WIDTH="829">
+        <String CONTENT="SPÉCIALITÉS" HEIGHT="59" HPOS="410" ID="PAG_1_ST000010" STYLEREFS="TXT_4" VPOS="1679" WC="0.01" WIDTH="829"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="243" HPOS="129" ID="PAG_1_TB000003" STYLEREFS="TXT_4" VPOS="1769" WIDTH="1400">
+      <TextLine HEIGHT="63" HPOS="129" ID="PAG_1_TL000004" STYLEREFS="TXT_4" VPOS="1769" WIDTH="1400">
+        <String CONTENT="CIIASSE" HEIGHT="46" HPOS="129" ID="PAG_1_ST000011" STYLEREFS="TXT_4" VPOS="1781" WC="0.87" WIDTH="295"/>
+        <SP HPOS="424" ID="PAG_1_SP000008" VPOS="1781" WIDTH="98"/>
+        <String CONTENT="LIVRÉES" HEIGHT="58" HPOS="565" ID="PAG_1_ST000012" STYLEREFS="TXT_4" VPOS="1769" WC="0.01" WIDTH="317"/>
+        <SP HPOS="882" ID="PAG_1_SP000009" VPOS="1769" WIDTH="45"/>
+        <String CONTENT="&#8211;" HEIGHT="58" HPOS="927" ID="PAG_1_ST000013" STYLEREFS="TXT_4" VPOS="1769" WC="0.01" WIDTH="45"/>
+        <SP HPOS="973" ID="PAG_1_SP000010" VPOS="1783" WIDTH="43"/>
+        <String CONTENT="AUTOMOBILES" HEIGHT="49" HPOS="1016" ID="PAG_1_ST000014" STYLEREFS="TXT_4" VPOS="1783" WC="0.01" WIDTH="513"/>
+      </TextLine>
+      <TextLine HEIGHT="84" HPOS="316" ID="PAG_1_TL000005" STYLEREFS="TXT_5" VPOS="1928" WIDTH="1042">
+        <String CONTENT="Augustin" HEIGHT="84" HPOS="316" ID="PAG_1_ST000015" STYLEREFS="TXT_5" VPOS="1928" WC="0.99" WIDTH="434"/>
+        <SP HPOS="750" ID="PAG_1_SP000011" VPOS="1928" WIDTH="109"/>
+        <String CONTENT="DONNYX(" HEIGHT="69" HPOS="859" ID="PAG_1_ST000016" STYLEREFS="TXT_5" VPOS="1928" WC="0.01" WIDTH="499"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="135" HPOS="131" ID="PAG_1_TB000004" STYLEREFS="TXT_3" VPOS="2039" WIDTH="1399">
+      <TextLine HEIGHT="52" HPOS="217" ID="PAG_1_TL000006" STYLEREFS="TXT_3" VPOS="2039" WIDTH="1205">
+        <String CONTENT="4," HEIGHT="40" HPOS="217" ID="PAG_1_ST000017" STYLEREFS="TXT_3" VPOS="2044" WC="0.99" WIDTH="40"/>
+        <SP HPOS="257" ID="PAG_1_SP000012" VPOS="2042" WIDTH="34"/>
+        <String CONTENT="Rue" HEIGHT="40" HPOS="291" ID="PAG_1_ST000018" STYLEREFS="TXT_3" VPOS="2042" WC="0.99" WIDTH="91"/>
+        <SP HPOS="382" ID="PAG_1_SP000013" VPOS="2042" WIDTH="31"/>
+        <String CONTENT="de" HEIGHT="35" HPOS="413" ID="PAG_1_ST000019" STYLEREFS="TXT_3" VPOS="2042" WC="0.99" WIDTH="52"/>
+        <SP HPOS="465" ID="PAG_1_SP000014" VPOS="2039" WIDTH="31"/>
+        <String CONTENT="Rohan" HEIGHT="42" HPOS="496" ID="PAG_1_ST000020" STYLEREFS="TXT_3" VPOS="2039" WC="0.99" WIDTH="166"/>
+        <SP HPOS="662" ID="PAG_1_SP000015" VPOS="2039" WIDTH="63"/>
+        <String CONTENT="Place" HEIGHT="35" HPOS="759" ID="PAG_1_ST000021" STYLEREFS="TXT_6" VPOS="2042" WC="0.99" WIDTH="125"/>
+        <SP HPOS="884" ID="PAG_1_SP000016" VPOS="2043" WIDTH="28"/>
+        <String CONTENT="du" HEIGHT="35" HPOS="912" ID="PAG_1_ST000022" STYLEREFS="TXT_3" VPOS="2043" WC="0.99" WIDTH="58"/>
+        <SP HPOS="970" ID="PAG_1_SP000017" VPOS="2041" WIDTH="30"/>
+        <String CONTENT="Théâtre-Français" HEIGHT="50" HPOS="1000" ID="PAG_1_ST000023" STYLEREFS="TXT_3" VPOS="2041" WC="0.99" WIDTH="422"/>
+      </TextLine>
+      <TextLine HEIGHT="48" HPOS="131" ID="PAG_1_TL000007" STYLEREFS="TXT_4" VPOS="2126" WIDTH="1399">
+        <String CONTENT="Téléphone" HEIGHT="38" HPOS="131" ID="PAG_1_ST000024" STYLEREFS="TXT_3" VPOS="2135" WC="0.99" WIDTH="181"/>
+        <SP HPOS="312" ID="PAG_1_SP000018" VPOS="2135" WIDTH="29"/>
+        <String CONTENT="107.08" HEIGHT="31" HPOS="341" ID="PAG_1_ST000025" STYLEREFS="TXT_3" VPOS="2135" WC="0.44" WIDTH="132"/>
+        <SP HPOS="473" ID="PAG_1_SP000019" VPOS="2126" WIDTH="239"/>
+        <String CONTENT="PARIS" HEIGHT="43" HPOS="712" ID="PAG_1_ST000026" STYLEREFS="TXT_4" VPOS="2126" WC="0.99" WIDTH="205"/>
+        <SP HPOS="917" ID="PAG_1_SP000020" VPOS="2137" WIDTH="259"/>
+        <String CONTENT="Téléphone" HEIGHT="37" HPOS="1176" ID="PAG_1_ST000027" STYLEREFS="TXT_4" VPOS="2137" WC="0.01" WIDTH="183"/>
+        <SP HPOS="1359" ID="PAG_1_SP000021" VPOS="2140" WIDTH="35"/>
+        <String CONTENT="107.08" HEIGHT="33" HPOS="1394" ID="PAG_1_ST000028" STYLEREFS="TXT_4" VPOS="2140" WC="0.99" WIDTH="136"/>
+      </TextLine>
+    </TextBlock>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>

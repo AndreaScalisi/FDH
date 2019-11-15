@@ -1,0 +1,47 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000413.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 05.24 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="12" ID="TXT_1"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="2481" ID="PAG_413" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="1749">
+    <PrintSpace HEIGHT="192" HPOS="220" ID="PAG_413_PrintSpace" VPOS="223" WIDTH="1212">
+    <TextBlock HEIGHT="62" HPOS="220" ID="PAG_413_TB000001" STYLEREFS="TXT_1" VPOS="353" WIDTH="1212">
+      <TextLine HEIGHT="62" HPOS="220" ID="PAG_413_TL000001" STYLEREFS="TXT_1" VPOS="353" WIDTH="1212">
+        <String CONTENT="j\èception" HEIGHT="60" HPOS="220" ID="PAG_413_ST000001" STYLEREFS="TXT_1" VPOS="355" WC="0.01" WIDTH="215"/>
+        <SP HPOS="435" ID="PAG_413_SP000001" VPOS="353" WIDTH="680"/>
+        <String CONTENT="V)" HEIGHT="50" HPOS="1115" ID="PAG_413_ST000002" STYLEREFS="TXT_1" VPOS="353" WC="0.01" WIDTH="37"/>
+        <SP HPOS="1152" ID="PAG_413_SP000002" VPOS="353" WIDTH="18"/>
+        <String CONTENT="bâezvatiotuxj?" HEIGHT="50" HPOS="1170" ID="PAG_413_ST000003" STYLEREFS="TXT_1" VPOS="353" WC="0.01" WIDTH="260"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="55" HPOS="711" ID="PAG_413_TB000002" STYLEREFS="TXT_1" VPOS="223" WIDTH="209">
+      <TextLine HEIGHT="55" HPOS="711" ID="PAG_413_TL000002" STYLEREFS="TXT_1" VPOS="223" WIDTH="209">
+        <String CONTENT="JEUDI" HEIGHT="55" HPOS="711" ID="PAG_413_ST000004" STYLEREFS="TXT_1" VPOS="223" WC="0.99" WIDTH="209"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="27" HPOS="753" ID="PAG_413_TB000003" STYLEREFS="TXT_1" VPOS="316" WIDTH="142">
+      <TextLine HEIGHT="27" HPOS="753" ID="PAG_413_TL000003" STYLEREFS="TXT_1" VPOS="316" WIDTH="142">
+        <String CONTENT="&#8226;*&#8226;" HEIGHT="27" HPOS="753" ID="PAG_413_ST000005" STYLEREFS="TXT_1" VPOS="316" WC="0.01" WIDTH="42"/>
+        <SP HPOS="795" ID="PAG_413_SP000003" VPOS="316" WIDTH="14"/>
+        <String CONTENT="4*" HEIGHT="27" HPOS="809" ID="PAG_413_ST000006" STYLEREFS="TXT_1" VPOS="316" WC="0.01" WIDTH="28"/>
+        <SP HPOS="837" ID="PAG_413_SP000004" VPOS="316" WIDTH="14"/>
+        <String CONTENT="&#8226;*&#8226;" HEIGHT="27" HPOS="851" ID="PAG_413_ST000007" STYLEREFS="TXT_1" VPOS="316" WC="0.01" WIDTH="42"/>
+      </TextLine>
+    </TextBlock>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>

@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000412.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 20.93 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="12" ID="TXT_1"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="2481" ID="PAG_412" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="1749">
+    <PrintSpace HEIGHT="193" HPOS="322" ID="PAG_412_PrintSpace" VPOS="227" WIDTH="1209">
+    <TextBlock HEIGHT="61" HPOS="322" ID="PAG_412_TB000001" STYLEREFS="TXT_1" VPOS="359" WIDTH="1209">
+      <TextLine HEIGHT="61" HPOS="322" ID="PAG_412_TL000001" STYLEREFS="TXT_1" VPOS="359" WIDTH="1209">
+        <String CONTENT="J\éception" HEIGHT="61" HPOS="322" ID="PAG_412_ST000001" STYLEREFS="TXT_1" VPOS="359" WC="0.01" WIDTH="217"/>
+        <SP HPOS="539" ID="PAG_412_SP000001" VPOS="393" WIDTH="352"/>
+        <String CONTENT="&#771;" HEIGHT="5" HPOS="891" ID="PAG_412_ST000002" STYLEREFS="TXT_1" VPOS="393" WC="0.01" WIDTH="7"/>
+        <SP HPOS="898" ID="PAG_412_SP000002" VPOS="361" WIDTH="318"/>
+        <String CONTENT="t)b6ewationcxj7" HEIGHT="51" HPOS="1216" ID="PAG_412_ST000003" STYLEREFS="TXT_1" VPOS="361" WC="0.01" WIDTH="315"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="49" HPOS="742" ID="PAG_412_TB000002" STYLEREFS="TXT_1" VPOS="227" WIDTH="383">
+      <TextLine HEIGHT="49" HPOS="742" ID="PAG_412_TL000002" STYLEREFS="TXT_1" VPOS="227" WIDTH="383">
+        <String CONTENT="MERCREDI" HEIGHT="49" HPOS="742" ID="PAG_412_ST000004" STYLEREFS="TXT_1" VPOS="227" WC="0.99" WIDTH="383"/>
+      </TextLine>
+    </TextBlock>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>

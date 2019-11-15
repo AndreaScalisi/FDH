@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000569.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 45.37 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="32" ID="TXT_1"/>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="13" ID="TXT_2"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="2481" ID="PAG_569" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="1749">
+    <PrintSpace HEIGHT="546" HPOS="416" ID="PAG_569_PrintSpace" VPOS="824" WIDTH="870">
+    <TextBlock HEIGHT="108" HPOS="492" ID="PAG_569_TB000001" STYLEREFS="TXT_1" VPOS="824" WIDTH="726">
+      <TextLine HEIGHT="108" HPOS="492" ID="PAG_569_TL000001" STYLEREFS="TXT_1" VPOS="824" WIDTH="726">
+        <String CONTENT="THÉÂTRES" HEIGHT="108" HPOS="492" ID="PAG_569_ST000001" STYLEREFS="TXT_1" VPOS="824" WC="0.48" WIDTH="726"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="49" HPOS="416" ID="PAG_569_TB000002" STYLEREFS="TXT_2" VPOS="1187" WIDTH="870">
+      <TextLine HEIGHT="49" HPOS="416" ID="PAG_569_TL000002" STYLEREFS="TXT_2" VPOS="1187" WIDTH="870">
+        <String CONTENT="JOURNAUX." HEIGHT="47" HPOS="416" ID="PAG_569_ST000002" STYLEREFS="TXT_2" VPOS="1189" WC="0.01" WIDTH="404"/>
+        <SP HPOS="820" ID="PAG_569_SP000001" VPOS="1189" WIDTH="44"/>
+        <String CONTENT="ET" HEIGHT="47" HPOS="864" ID="PAG_569_ST000003" STYLEREFS="TXT_2" VPOS="1189" WC="0.01" WIDTH="89"/>
+        <SP HPOS="955" ID="PAG_569_SP000002" VPOS="1187" WIDTH="59"/>
+        <String CONTENT="REVUES" HEIGHT="42" HPOS="1014" ID="PAG_569_ST000004" STYLEREFS="TXT_2" VPOS="1187" WC="0.99" WIDTH="272"/>
+      </TextLine>
+    </TextBlock>
+    <GraphicalElement HEIGHT="52" HPOS="752" ID="PAG_569_GE000001" VPOS="1002" WIDTH="212"/>
+    <GraphicalElement HEIGHT="60" HPOS="744" ID="PAG_569_GE000002" VPOS="1310" WIDTH="250"/>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>

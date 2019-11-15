@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000636.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 21.90 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="12" ID="TXT_1"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="1749" ID="PAG_636" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="2481">
+    <TopMargin HEIGHT="1048" HPOS="0" ID="PAG_636_TopMargin" VPOS="0" WIDTH="2481">
+    <TextBlock HEIGHT="26" HPOS="2368" ID="PAG_636_TB000001" STYLEREFS="TXT_1" TYPE="elligible" VPOS="710" WIDTH="28">
+      <TextLine HEIGHT="26" HPOS="2368" ID="PAG_636_TL000001" STYLEREFS="TXT_1" VPOS="710" WIDTH="28">
+        <String CONTENT="&quot;t1" HEIGHT="26" HPOS="2368" ID="PAG_636_ST000001" STYLEREFS="TXT_1" VPOS="710" WC="0.01" WIDTH="28"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="25" HPOS="2369" ID="PAG_636_TB000002" STYLEREFS="TXT_1" TYPE="elligible" VPOS="739" WIDTH="26">
+      <TextLine HEIGHT="25" HPOS="2369" ID="PAG_636_TL000002" STYLEREFS="TXT_1" VPOS="739" WIDTH="26">
+        <String CONTENT="F" HEIGHT="25" HPOS="2369" ID="PAG_636_ST000002" STYLEREFS="TXT_1" VPOS="739" WC="0.42" WIDTH="26"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="29" HPOS="2369" ID="PAG_636_TB000003" STYLEREFS="TXT_1" TYPE="elligible" VPOS="767" WIDTH="27">
+      <TextLine HEIGHT="29" HPOS="2369" ID="PAG_636_TL000003" STYLEREFS="TXT_1" VPOS="767" WIDTH="27">
+        <String CONTENT="&gt;" HEIGHT="29" HPOS="2369" ID="PAG_636_ST000003" STYLEREFS="TXT_1" VPOS="767" WC="0.01" WIDTH="27"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="25" HPOS="2372" ID="PAG_636_TB000004" STYLEREFS="TXT_1" TYPE="elligible" VPOS="891" WIDTH="25">
+      <TextLine HEIGHT="25" HPOS="2372" ID="PAG_636_TL000004" STYLEREFS="TXT_1" VPOS="891" WIDTH="25">
+        <String CONTENT="M" HEIGHT="25" HPOS="2372" ID="PAG_636_ST000004" STYLEREFS="TXT_1" VPOS="891" WC="0.01" WIDTH="25"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="28" HPOS="2373" ID="PAG_636_TB000005" STYLEREFS="TXT_1" TYPE="elligible" VPOS="944" WIDTH="25">
+      <TextLine HEIGHT="28" HPOS="2373" ID="PAG_636_TL000005" STYLEREFS="TXT_1" VPOS="944" WIDTH="25">
+        <String CONTENT="5!" HEIGHT="28" HPOS="2373" ID="PAG_636_ST000005" STYLEREFS="TXT_1" VPOS="944" WC="0.27" WIDTH="25"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="14" HPOS="2373" ID="PAG_636_TB000006" STYLEREFS="TXT_1" TYPE="elligible" VPOS="976" WIDTH="26">
+      <TextLine HEIGHT="14" HPOS="2373" ID="PAG_636_TL000006" STYLEREFS="TXT_1" VPOS="976" WIDTH="26">
+        <String CONTENT="H*" HEIGHT="14" HPOS="2373" ID="PAG_636_ST000006" STYLEREFS="TXT_1" VPOS="976" WC="0.01" WIDTH="26"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="23" HPOS="2373" ID="PAG_636_TB000007" STYLEREFS="TXT_1" TYPE="elligible" VPOS="995" WIDTH="27">
+      <TextLine HEIGHT="23" HPOS="2373" ID="PAG_636_TL000007" STYLEREFS="TXT_1" VPOS="995" WIDTH="27">
+        <String CONTENT="0" HEIGHT="23" HPOS="2373" ID="PAG_636_ST000007" STYLEREFS="TXT_1" VPOS="995" WC="0.98" WIDTH="27"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="25" HPOS="2374" ID="PAG_636_TB000008" STYLEREFS="TXT_1" TYPE="elligible" VPOS="1023" WIDTH="29">
+      <TextLine HEIGHT="25" HPOS="2374" ID="PAG_636_TL000008" STYLEREFS="TXT_1" VPOS="1023" WIDTH="29">
+        <String CONTENT="«" HEIGHT="25" HPOS="2374" ID="PAG_636_ST000008" STYLEREFS="TXT_1" VPOS="1023" WC="0.53" WIDTH="29"/>
+      </TextLine>
+    </TextBlock>
+    </TopMargin>
+    <PrintSpace HEIGHT="1528" HPOS="168" ID="PAG_636_PrintSpace" VPOS="118" WIDTH="2140">
+    <Illustration HEIGHT="1528" HPOS="168" ID="PAG_636_IL000001" VPOS="118" WIDTH="2140"/>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>

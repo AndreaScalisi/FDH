@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000416.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 68.19 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="15" ID="TXT_1"/>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="10" ID="TXT_2"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="2481" ID="PAG_416" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="1749">
+    <PrintSpace HEIGHT="196" HPOS="326" ID="PAG_416_PrintSpace" VPOS="231" WIDTH="1212">
+    <TextBlock HEIGHT="64" HPOS="326" ID="PAG_416_TB000001" STYLEREFS="TXT_2" VPOS="363" WIDTH="1212">
+      <TextLine HEIGHT="64" HPOS="326" ID="PAG_416_TL000001" STYLEREFS="TXT_2" VPOS="363" WIDTH="1212">
+        <String CONTENT="Réception" HEIGHT="61" HPOS="326" ID="PAG_416_ST000001" STYLEREFS="TXT_2" VPOS="366" WC="0.01" WIDTH="215"/>
+        <SP HPOS="541" ID="PAG_416_SP000001" VPOS="363" WIDTH="679"/>
+        <String CONTENT="VJbâezvation&amp;j)" HEIGHT="50" HPOS="1220" ID="PAG_416_ST000002" STYLEREFS="TXT_2" VPOS="363" WC="0.23" WIDTH="318"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="47" HPOS="730" ID="PAG_416_TB000002" STYLEREFS="TXT_1" VPOS="231" WIDTH="403">
+      <TextLine HEIGHT="47" HPOS="730" ID="PAG_416_TL000002" STYLEREFS="TXT_1" VPOS="231" WIDTH="403">
+        <String CONTENT="DIMANCHE" HEIGHT="47" HPOS="730" ID="PAG_416_ST000003" STYLEREFS="TXT_1" VPOS="231" WC="0.99" WIDTH="403"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="26" HPOS="857" ID="PAG_416_TB000003" STYLEREFS="TXT_1" VPOS="325" WIDTH="139">
+      <TextLine HEIGHT="26" HPOS="857" ID="PAG_416_TL000003" STYLEREFS="TXT_1" VPOS="325" WIDTH="139">
+        <String CONTENT="&#9830;" HEIGHT="26" HPOS="857" ID="PAG_416_ST000004" STYLEREFS="TXT_1" VPOS="325" WC="0.88" WIDTH="23"/>
+        <SP HPOS="880" ID="PAG_416_SP000002" VPOS="325" WIDTH="23"/>
+        <String CONTENT="&quot;V" HEIGHT="26" HPOS="903" ID="PAG_416_ST000005" STYLEREFS="TXT_1" VPOS="325" WC="0.88" WIDTH="46"/>
+        <SP HPOS="949" ID="PAG_416_SP000003" VPOS="325" WIDTH="23"/>
+        <String CONTENT="&#9830;" HEIGHT="26" HPOS="972" ID="PAG_416_ST000006" STYLEREFS="TXT_1" VPOS="325" WC="0.88" WIDTH="23"/>
+      </TextLine>
+    </TextBlock>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>

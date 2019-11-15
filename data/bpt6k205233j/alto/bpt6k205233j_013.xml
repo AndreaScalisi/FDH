@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000013.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 77.14 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="9" ID="TXT_1"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="2481" ID="PAG_13" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="1749">
+    <TopMargin HEIGHT="132" HPOS="0" ID="PAG_13_TopMargin" VPOS="0" WIDTH="1749">
+    <TextBlock HEIGHT="36" HPOS="601" ID="PAG_13_TB000001" STYLEREFS="TXT_1" VPOS="79" WIDTH="444">
+      <TextLine HEIGHT="36" HPOS="601" ID="PAG_13_TL000001" STYLEREFS="TXT_1" VPOS="79" WIDTH="444">
+        <String CONTENT="ÉLÉMENTS" HEIGHT="36" HPOS="601" ID="PAG_13_ST000001" STYLEREFS="TXT_1" VPOS="79" WC="0.01" WIDTH="202"/>
+        <SP HPOS="803" ID="PAG_13_SP000001" VPOS="85" WIDTH="23"/>
+        <String CONTENT="DU" HEIGHT="29" HPOS="826" ID="PAG_13_ST000002" STYLEREFS="TXT_1" VPOS="85" WC="0.99" WIDTH="51"/>
+        <SP HPOS="877" ID="PAG_13_SP000002" VPOS="85" WIDTH="23"/>
+        <String CONTENT="BLASON" HEIGHT="30" HPOS="900" ID="PAG_13_ST000003" STYLEREFS="TXT_1" VPOS="85" WC="0.99" WIDTH="145"/>
+      </TextLine>
+    </TextBlock>
+    </TopMargin>
+    <PrintSpace HEIGHT="2092" HPOS="92" ID="PAG_13_PrintSpace" VPOS="132" WIDTH="1486">
+    <Illustration HEIGHT="2092" HPOS="92" ID="PAG_13_IL000001" VPOS="132" WIDTH="1486"/>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>

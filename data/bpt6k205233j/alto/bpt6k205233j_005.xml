@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000005.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 55.09 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="19" ID="TXT_1"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="2481" ID="PAG_5" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="1749">
+    <PrintSpace HEIGHT="582" HPOS="343" ID="PAG_5_PrintSpace" VPOS="702" WIDTH="1035">
+    <TextBlock HEIGHT="96" HPOS="343" ID="PAG_5_TB000001" STYLEREFS="TXT_1" VPOS="702" WIDTH="1035">
+      <TextLine HEIGHT="96" HPOS="343" ID="PAG_5_TL000001" STYLEREFS="TXT_1" VPOS="702" WIDTH="1035">
+        <String CONTENT="PARIS-MONDAIN" HEIGHT="96" HPOS="343" ID="PAG_5_ST000001" STYLEREFS="TXT_1" VPOS="702" WC="0.51" WIDTH="1035"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="60" HPOS="776" ID="PAG_5_TB000002" STYLEREFS="TXT_1" VPOS="1224" WIDTH="170">
+      <TextLine HEIGHT="60" HPOS="776" ID="PAG_5_TL000002" STYLEREFS="TXT_1" VPOS="1224" WIDTH="170">
+        <String CONTENT="1908" HEIGHT="60" HPOS="776" ID="PAG_5_ST000002" STYLEREFS="TXT_1" VPOS="1224" WC="0.62" WIDTH="170"/>
+      </TextLine>
+    </TextBlock>
+    <GraphicalElement HEIGHT="40" HPOS="642" ID="PAG_5_GE000001" VPOS="958" WIDTH="458"/>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>

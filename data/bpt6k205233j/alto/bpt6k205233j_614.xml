@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000614.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 18.99 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="9" ID="TXT_1"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="2481" ID="PAG_614" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="1749">
+    <TopMargin HEIGHT="168" HPOS="0" ID="PAG_614_TopMargin" VPOS="0" WIDTH="1749">
+    <TextBlock HEIGHT="32" HPOS="754" ID="PAG_614_TB000001" STYLEREFS="TXT_1" VPOS="89" WIDTH="299">
+      <TextLine HEIGHT="32" HPOS="754" ID="PAG_614_TL000001" STYLEREFS="TXT_1" VPOS="89" WIDTH="299">
+        <String CONTENT="PARIS-MONDAIN" HEIGHT="32" HPOS="754" ID="PAG_614_ST000001" STYLEREFS="TXT_1" VPOS="89" WC="0.01" WIDTH="299"/>
+      </TextLine>
+    </TextBlock>
+    </TopMargin>
+    <PrintSpace HEIGHT="2112" HPOS="142" ID="PAG_614_PrintSpace" VPOS="168" WIDTH="1514">
+    <Illustration HEIGHT="2112" HPOS="142" ID="PAG_614_IL000001" VPOS="168" WIDTH="1514"/>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>

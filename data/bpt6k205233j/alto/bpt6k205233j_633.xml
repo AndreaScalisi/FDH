@@ -1,0 +1,66 @@
+<?xml version="1.0" encoding="ISO-8859-1" standalone="no"?>
+<alto xmlns="http://bibnum.bnf.fr/ns/alto_prod" xmlns:xlink="http://www.w3.org/TR/xlink" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" ID="alto.205233" xsi:schemaLocation="http://bibnum.bnf.fr/ns/alto_prod http://bibnum.bnf.fr/ns/alto_prod.xsd">
+  <Description>
+    <MeasurementUnit>pixel</MeasurementUnit>
+    <sourceImageInformation>
+      <fileName>00000633.tif</fileName>
+    </sourceImageInformation>
+    <OCRProcessing ID="OCR_1">
+      <ocrProcessingStep>
+        <processingDateTime>2008-08-19</processingDateTime>
+        <processingStepSettings>OCR BRUT 97.73 %</processingStepSettings>
+      </ocrProcessingStep>
+    </OCRProcessing>
+  </Description>
+  <Styles>
+    <TextStyle FONTFAMILY="Times" FONTSIZE="10" ID="TXT_1"/>
+    <TextStyle FONTFAMILY="Arial" FONTSIZE="10" ID="TXT_2"/>
+  </Styles>
+  <Layout>
+    <Page HEIGHT="2481" ID="PAG_633" PHYSICAL_IMG_NR="1" QUALITY="OK" WIDTH="1749">
+    <PrintSpace HEIGHT="1902" HPOS="120" ID="PAG_633_PrintSpace" VPOS="310" WIDTH="1492">
+    <TextBlock HEIGHT="256" HPOS="282" ID="PAG_633_TB000001" STYLEREFS="TXT_1" VPOS="310" WIDTH="1160">
+      <TextLine HEIGHT="108" HPOS="282" ID="PAG_633_TL000001" STYLEREFS="TXT_1" VPOS="310" WIDTH="1160">
+        <String CONTENT="PARIS-MONDAIN" HEIGHT="108" HPOS="282" ID="PAG_633_ST000001" STYLEREFS="TXT_1" VPOS="310" WC="0.99" WIDTH="1160"/>
+      </TextLine>
+      <TextLine HEIGHT="31" HPOS="792" ID="PAG_633_TL000002" STYLEREFS="TXT_1" VPOS="535" WIDTH="142">
+        <String CONTENT="ET" HEIGHT="30" HPOS="792" ID="PAG_633_ST000002" STYLEREFS="TXT_1" VPOS="535" WC="0.99" WIDTH="52"/>
+        <SP HPOS="844" ID="PAG_633_SP000001" VPOS="536" WIDTH="36"/>
+        <String CONTENT="LA" HEIGHT="30" HPOS="880" ID="PAG_633_ST000003" STYLEREFS="TXT_1" VPOS="536" WC="0.99" WIDTH="54"/>
+      </TextLine>
+    </TextBlock>
+    <TextBlock HEIGHT="84" HPOS="420" ID="PAG_633_TB000002" STYLEREFS="TXT_1" VPOS="686" WIDTH="900">
+      <TextLine HEIGHT="84" HPOS="420" ID="PAG_633_TL000003" STYLEREFS="TXT_1" VPOS="686" WIDTH="900">
+        <String CONTENT="COTE" HEIGHT="82" HPOS="420" ID="PAG_633_ST000004" STYLEREFS="TXT_1" VPOS="688" WC="0.99" WIDTH="330"/>
+        <SP HPOS="750" ID="PAG_633_SP000002" VPOS="686" WIDTH="70"/>
+        <String CONTENT="D'AZUR" HEIGHT="82" HPOS="820" ID="PAG_633_ST000005" STYLEREFS="TXT_1" VPOS="686" WC="0.23" WIDTH="500"/>
+      </TextLine>
+    </TextBlock>
+    <Illustration HEIGHT="1036" HPOS="120" ID="PAG_633_IL000001" VPOS="948" WIDTH="1492"/>
+    <TextBlock HEIGHT="182" HPOS="488" ID="PAG_633_TB000003" STYLEREFS="TXT_1" VPOS="2030" WIDTH="746">
+      <TextLine HEIGHT="46" HPOS="488" ID="PAG_633_TL000004" STYLEREFS="TXT_1" VPOS="2030" WIDTH="746">
+        <String CONTENT="A." HEIGHT="29" HPOS="488" ID="PAG_633_ST000006" STYLEREFS="TXT_1" VPOS="2040" WC="0.99" WIDTH="48"/>
+        <SP HPOS="536" ID="PAG_633_SP000003" VPOS="2037" WIDTH="40"/>
+        <String CONTENT="SAINT-MARTIN," HEIGHT="39" HPOS="576" ID="PAG_633_ST000007" STYLEREFS="TXT_1" VPOS="2037" WC="0.99" WIDTH="437"/>
+        <SP HPOS="1013" ID="PAG_633_SP000004" VPOS="2030" WIDTH="45"/>
+        <String CONTENT="Éditeur" HEIGHT="39" HPOS="1058" ID="PAG_633_ST000008" STYLEREFS="TXT_1" VPOS="2030" WC="0.99" WIDTH="176"/>
+      </TextLine>
+      <TextLine HEIGHT="39" HPOS="565" ID="PAG_633_TL000005" STYLEREFS="TXT_1" VPOS="2106" WIDTH="588">
+        <String CONTENT="12," HEIGHT="38" HPOS="565" ID="PAG_633_ST000009" STYLEREFS="TXT_1" VPOS="2106" WC="0.99" WIDTH="64"/>
+        <SP HPOS="629" ID="PAG_633_SP000005" VPOS="2116" WIDTH="33"/>
+        <String CONTENT="rue" HEIGHT="21" HPOS="662" ID="PAG_633_ST000010" STYLEREFS="TXT_1" VPOS="2116" WC="0.99" WIDTH="75"/>
+        <SP HPOS="737" ID="PAG_633_SP000006" VPOS="2106" WIDTH="34"/>
+        <String CONTENT="de" HEIGHT="31" HPOS="771" ID="PAG_633_ST000011" STYLEREFS="TXT_1" VPOS="2106" WC="0.99" WIDTH="51"/>
+        <SP HPOS="822" ID="PAG_633_SP000007" VPOS="2107" WIDTH="37"/>
+        <String CONTENT="Bassano," HEIGHT="38" HPOS="859" ID="PAG_633_ST000012" STYLEREFS="TXT_1" VPOS="2107" WC="0.99" WIDTH="210"/>
+        <SP HPOS="1069" ID="PAG_633_SP000008" VPOS="2107" WIDTH="34"/>
+        <String CONTENT="12" HEIGHT="31" HPOS="1103" ID="PAG_633_ST000013" STYLEREFS="TXT_1" VPOS="2107" WC="0.99" WIDTH="50"/>
+      </TextLine>
+      <TextLine HEIGHT="38" HPOS="776" ID="PAG_633_TL000006" STYLEREFS="TXT_2" VPOS="2174" WIDTH="140">
+        <String CONTENT="PARIS" HEIGHT="38" HPOS="776" ID="PAG_633_ST000014" STYLEREFS="TXT_2" VPOS="2174" WC="0.99" WIDTH="140"/>
+      </TextLine>
+    </TextBlock>
+    </PrintSpace>
+    </Page>
+  </Layout>
+</alto>
