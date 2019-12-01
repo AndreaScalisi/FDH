@@ -79,7 +79,7 @@ function popupContent(name,adr){
     return content;
 }
 
-//Function to check the addresses are in Paris
+//Function to check if the addresses are in Paris
 function checkBounds(people_coord){
 	inParis = false;
 	bound = [49,2.35];
@@ -95,3 +95,34 @@ function checkBounds(people_coord){
 
 	return inParis;
 }
+
+
+//Function to search in Wikipedia for more information on the people
+async function wikiSearch(name){
+	if (typeof name != "undefined"){
+		name = name.trim()
+	}
+	var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ name +"&format=json&callback=?";
+
+	link = "No results found!"
+	$.ajax({
+		url: url,
+		type: "GET",
+		async: true,
+		dataType: "json",
+		success: function(data, status, jqXHR){
+			//Get the first link found
+			//console.log(jqXHR.responseJSON[3][0])
+			link = jqXHR.responseJSON[3][0]
+		}
+	})
+
+	return link;
+}
+
+async function getUrl(name){
+	link = await wikiSearch(name)
+	return link
+}
+
+test = getUrl("dog")
