@@ -97,32 +97,29 @@ function checkBounds(people_coord){
 }
 
 
-//Function to search in Wikipedia for more information on the people
-async function wikiSearch(name){
+//Function to search in Wikipedia for more information on the people (NOT WORKING YET!)
+function wikiSearch(name){
 	if (typeof name != "undefined"){
 		name = name.trim()
 	}
+	//Url for the wiki search: name is the search term
 	var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ name +"&format=json&callback=?";
 
 	link = "No results found!"
-	$.ajax({
-		url: url,
-		type: "GET",
-		async: true,
-		dataType: "json",
-		success: function(data, status, jqXHR){
-			//Get the first link found
-			//console.log(jqXHR.responseJSON[3][0])
-			link = jqXHR.responseJSON[3][0]
-		}
+	xhr = $.ajax({
+				url: url,
+				type: "GET",
+				async: true,
+				dataType: "json",
+			})
+
+	xhr.then(function(){
+		link = xhr.responseJSON[3][0]
+		console.log("Link: " + link)
 	})
 
-	return link;
-}
-
-async function getUrl(name){
-	link = await wikiSearch(name)
 	return link
 }
 
-test = getUrl("dog")
+
+test = wikiSearch("dog")
