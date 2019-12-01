@@ -1,5 +1,11 @@
+//Global variables
 const paris_coord = [48.864716, 2.349014];
-drawMap(1884)
+var markers = L.markerClusterGroup({
+	singleMarkerMode: true //Show single elements as clusters of size 1
+});
+const mymap = L.map('mapid').setView(L.latLng(paris_coord), 12.4);
+
+drawMap(1908);
 
 
 //Function to parse the data in the csv file
@@ -25,7 +31,6 @@ async function getData(year) {
 
 //Function to draw the map with the clusters
 function drawMap(year){
-	const mymap = L.map('mapid').setView(L.latLng(paris_coord), 12.4);
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 20,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -34,7 +39,7 @@ function drawMap(year){
 		id: 'mapbox/streets-v11'
 	}).addTo(mymap);
 
-	//Overlay ancient map of Paris
+	//Overlay ancient map of Paris: https://github.com/kartena/leaflet-tilejson
 	//var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
     //imageBounds = [[40.712216, -74.22655], [40.773941, -74.12544]];
 	//L.imageOverlay(imageUrl, imageBounds).addTo(map);
@@ -45,33 +50,33 @@ function drawMap(year){
 //Function to draw the clusters
 async function drawClusters(map, year){
 	data = await getData(year);
-	var markers = L.markerClusterGroup({
-		singleMarkerMode: true //Show single elements as clusters of size 1
-	});
-
 	for (var i = 0; i < data.lat.length; i++) {
-		// Check for NaN values
-		lat = data.lat[i];
-		long = data.long[i];
-		if (lat != NaN && long != NaN) {
-			if (checkBounds([lat,long])){	//Check if the addresses is in Paris
-				var title = data.names[i];
-				if (typeof title != "undefined"){
-					title = title.trim()
-				}
-				var marker = L.marker(new L.LatLng(lat, long), { title: title });
-				marker.bindPopup(title);
-				markers.addLayer(marker);
-			}
-		} else {	//Outputs the corresponding name to check errors in the csv file
-			console.log(data.names[i]);				
-			console.log("Coordinates: " + i)		
-			console.log(lat);
-			console.log(long);
-		}
+		drawMarker(data.names[i],data.addresses[i],data.lat[i],data.long[i]);
 	}
 
 	map.addLayer(markers);
+}
+
+//Function to draw the markers
+function drawMarker(name,adr,lat,long){
+	if (checkBounds([lat,long])){	//Check if the address is in Paris
+		var marker = L.marker(new L.LatLng(lat, long));
+		marker.bindPopup(popupContent(name,adr));
+		markers.addLayer(marker);
+	}
+}
+
+//Function to create the content of the popups (ie relevant information on the person)
+function popupContent(name,adr){
+	if (typeof name != "undefined"){
+		name = name.trim()
+	}
+	if (typeof adr != "undefined"){
+		adr = adr.trim()
+	}
+	content = "<p><strong>Name:</strong> " + name + "<br /><strong>Address</strong>: " + adr + "</p>"
+
+    return content;
 }
 
 //Function to check the addresses are in Paris
@@ -81,8 +86,11 @@ function checkBounds(people_coord){
 	dist = math.distance(bound, paris_coord);
 	dist_people = math.distance(people_coord, paris_coord);
 
-	if (dist_people <= dist){
-		inParis = true;
+	//Check for NaN values (note math.distance() return NaN if one parameter is NaN)
+	if (dist_people != NaN){
+		if (dist_people <= dist){
+			inParis = true;
+		}
 	}
 
 	return inParis;
