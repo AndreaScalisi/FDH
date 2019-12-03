@@ -68,15 +68,56 @@ function drawMarker(name,adr,lat,long){
 
 //Function to create the content of the popups (ie relevant information on the person)
 function popupContent(name,adr){
-	if (typeof name != "undefined"){
-		name = name.trim()
-	}
+	name = name_format(name)
 	if (typeof adr != "undefined"){
 		adr = adr.trim()
 	}
 	content = "<p><strong>Name:</strong> " + name + "<br /><strong>Address</strong>: " + adr + "</p>"
+	//link = ""
+	//wikiSearch(name)
+	//content = content + "<br /><strong>More info at</strong>: " + link
 
     return content;
+}
+
+//Function to format the name (Capitalize only first letter of each word)
+function name_format(name){
+	if (typeof name != "undefined"){
+		name = name.trim()
+	}	
+	name_parts = name.split(" ")
+	for (var i = 0; i<name_parts.length; ++i){
+		if (name_parts[i].length > 0){
+			name_parts[i] = name_parts[i][0].toUpperCase() + name_parts[i].slice(1).toLowerCase()
+		}
+	}
+	name = name_parts.join(" ")
+	return name
+}
+
+//Function to search in Wikipedia for more information on the people 
+function wikiSearch(name){
+	if (typeof name != "undefined"){
+		name = name.trim()
+	}
+	//Url for the wiki search: name is the search term
+	var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ name +"&format=json&callback=?";
+
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "json",
+		success: function(results, status){
+			if (results[1].length > 0){
+				link = results[3][0]
+			} else {
+				link = "No results found!"
+			}
+		},
+		error: function(results, status, xhr){
+			console.log(status)
+		}
+	})
 }
 
 //Function to check if the addresses are in Paris
@@ -96,27 +137,3 @@ function checkBounds(people_coord){
 	return inParis;
 }
 
-var link = ""
-//Function to search in Wikipedia for more information on the people (NOT WORKING YET!)
-function wikiSearch(name){
-	if (typeof name != "undefined"){
-		name = name.trim()
-	}
-	//Url for the wiki search: name is the search term
-	var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ name +"&format=json&callback=?";
-
-	$.ajax({
-		url: url,
-		type: "GET",
-		dataType: "json",
-		success: function(results, status){
-			link = results[3][0]
-		},
-		error: function(xhr, status,error){
-			console.log(status)
-			//link = "No results found!"
-		}
-	})
-}
-
-wikiSearch("dog")
