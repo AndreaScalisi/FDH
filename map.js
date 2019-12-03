@@ -96,7 +96,7 @@ function checkBounds(people_coord){
 	return inParis;
 }
 
-
+var link = ""
 //Function to search in Wikipedia for more information on the people (NOT WORKING YET!)
 function wikiSearch(name){
 	if (typeof name != "undefined"){
@@ -105,21 +105,18 @@ function wikiSearch(name){
 	//Url for the wiki search: name is the search term
 	var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ name +"&format=json&callback=?";
 
-	link = "No results found!"
-	xhr = $.ajax({
-				url: url,
-				type: "GET",
-				async: true,
-				dataType: "json",
-			})
-
-	xhr.then(function(){
-		link = xhr.responseJSON[3][0]
-		console.log("Link: " + link)
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "json",
+		success: function(results, status){
+			link = results[3][0]
+		},
+		error: function(xhr, status,error){
+			console.log(status)
+			//link = "No results found!"
+		}
 	})
-
-	return link
 }
 
-
-test = wikiSearch("dog")
+wikiSearch("dog")
