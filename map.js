@@ -11,7 +11,7 @@ drawMap(1908);
 //Function to parse the data in the csv file
 async function getData(year) {
 	const path = 'data/final_' + year + '.csv'
-	console.log("Data from: " + path)
+	//console.log("Data from: " + path)
 	const response = await fetch(path);
 	const data = await response.text();
 	const addresses = [];
@@ -30,7 +30,7 @@ async function getData(year) {
 }
 
 //Function to draw the map with the clusters
-function drawMap(year){
+function drawMap(year, cluster = true, heatmap = false){
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 20,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -41,10 +41,14 @@ function drawMap(year){
 
 	//Overlay ancient map of Paris: https://github.com/kartena/leaflet-tilejson
 	//var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
-    //imageBounds = [[40.712216, -74.22655], [40.773941, -74.12544]];
-	//L.imageOverlay(imageUrl, imageBounds).addTo(map);
-
-	drawClusters(mymap, year);
+    //imageBounds = [[47, 2], [49, 3]];
+	//L.imageOverlay(imageUrl, imageBounds).addTo(mymap);
+	if (cluster){
+		drawClusters(mymap, year);
+	}
+	if (heatmap){
+		heatMap(mymap,year)	
+	}
 }
 
 //Function to draw the clusters
@@ -53,7 +57,7 @@ async function drawClusters(map, year){
 	for (var i = 0; i < data.lat.length; i++) {
 		drawMarker(data.names[i],data.addresses[i],data.lat[i],data.long[i]);
 	}
-
+	
 	map.addLayer(markers);
 }
 
@@ -137,3 +141,18 @@ function checkBounds(people_coord){
 	return inParis;
 }
 
+//Function to draw the heatmap to show the density of famous people in Paris
+async function heatMap(map,year){
+	data = await getData(year)
+	var heat = L.heatLayer(coordinates(data.lat,data.long), {radius: 25}).addTo(map);
+}
+
+function coordinates(lat,long){
+	coordinates = []
+	for (var i = 0; i < lat.length; i++) {
+		if (checkBounds([lat[i],long[i]])){
+			coordinates.push([lat[i],long[i]])
+		}
+	}
+	return coordinates
+}
