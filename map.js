@@ -7,27 +7,7 @@ const mymap = L.map('mapid').setView(L.latLng(paris_coord), 12.4);
 
 drawMap(1908);
 
-
-//Function to parse the data in the csv file
-async function getData(year) {
-	const path = 'data/final_' + year + '.csv'
-	//console.log("Data from: " + path)
-	const response = await fetch(path);
-	const data = await response.text();
-	const addresses = [];
-	const names = [];
-	const lat = [];
-	const long = [];
-	const rows = data.split('\n').slice(1);
-	rows.forEach(row => {
-	  const cols = row.split(',');
-	  addresses.push(cols[0].trim());
-	  names.push(cols[1]); //Some names return undefined, so no trim() possible here!
-	  lat.push(parseFloat(cols[2]));
-	  long.push(parseFloat(cols[3]));
-	});
-	return { addresses, names, lat, long };
-}
+// ---- MAIN FUNCTIONS ----
 
 //Function to draw the map with the clusters
 function drawMap(year, cluster = true, heatmap = false){
@@ -60,6 +40,61 @@ async function drawClusters(map, year){
 	
 	map.addLayer(markers);
 }
+
+
+//Function to draw the heatmap to show the density of famous people in Paris
+async function heatMap(map,year){
+	data = await getData(year)
+	var heat = L.heatLayer(coordinates(data.lat,data.long), {radius: 25}).addTo(map);
+}
+
+//Function to search in Wikipedia for more information on the people 
+function wikiSearch(name){
+	if (typeof name != "undefined"){
+		name = name.trim()
+	}
+	//Url for the wiki search: name is the search term
+	var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ name +"&format=json&callback=?";
+
+	$.ajax({
+		url: url,
+		type: "GET",
+		dataType: "json",
+		success: function(results, status){
+			if (results[1].length > 0){
+				link = results[3][0]
+			} else {
+				link = "No results found!"
+			}
+		},
+		error: function(results, status, xhr){
+			console.log(status)
+		}
+	})
+}
+
+//Function to parse the data in the csv file
+async function getData(year) {
+	const path = 'data/final_' + year + '.csv'
+	//console.log("Data from: " + path)
+	const response = await fetch(path);
+	const data = await response.text();
+	const addresses = [];
+	const names = [];
+	const lat = [];
+	const long = [];
+	const rows = data.split('\n').slice(1);
+	rows.forEach(row => {
+	  const cols = row.split(',');
+	  addresses.push(cols[0].trim());
+	  names.push(cols[1]); //Some names return undefined, so no trim() possible here!
+	  lat.push(parseFloat(cols[2]));
+	  long.push(parseFloat(cols[3]));
+	});
+	return { addresses, names, lat, long };
+}
+
+// ---- UTILITY FUNCTIONS ----
 
 //Function to draw the markers
 function drawMarker(name,adr,lat,long){
@@ -99,31 +134,6 @@ function name_format(name){
 	return name
 }
 
-//Function to search in Wikipedia for more information on the people 
-function wikiSearch(name){
-	if (typeof name != "undefined"){
-		name = name.trim()
-	}
-	//Url for the wiki search: name is the search term
-	var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ name +"&format=json&callback=?";
-
-	$.ajax({
-		url: url,
-		type: "GET",
-		dataType: "json",
-		success: function(results, status){
-			if (results[1].length > 0){
-				link = results[3][0]
-			} else {
-				link = "No results found!"
-			}
-		},
-		error: function(results, status, xhr){
-			console.log(status)
-		}
-	})
-}
-
 //Function to check if the addresses are in Paris
 function checkBounds(people_coord){
 	inParis = false;
@@ -141,12 +151,7 @@ function checkBounds(people_coord){
 	return inParis;
 }
 
-//Function to draw the heatmap to show the density of famous people in Paris
-async function heatMap(map,year){
-	data = await getData(year)
-	var heat = L.heatLayer(coordinates(data.lat,data.long), {radius: 25}).addTo(map);
-}
-
+//Function to combine lat & long into coordinates
 function coordinates(lat,long){
 	coordinates = []
 	for (var i = 0; i < lat.length; i++) {
