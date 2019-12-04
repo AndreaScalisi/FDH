@@ -5,7 +5,7 @@ var markers = L.markerClusterGroup({
 });
 const mymap = L.map('mapid').setView(L.latLng(paris_coord), 12.4);
 
-drawMap(1908);
+drawMap(1884, false, false);
 
 // ---- MAIN FUNCTIONS ----
 
@@ -18,6 +18,8 @@ function drawMap(year, cluster = true, heatmap = false){
 		'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
 		id: 'mapbox/streets-v11'
 	}).addTo(mymap);
+
+	arrondissements(mymap);
 
 	//Overlay ancient map of Paris: https://github.com/kartena/leaflet-tilejson
 	//var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
@@ -45,16 +47,19 @@ async function drawClusters(map, year){
 //Function to draw the heatmap to show the density of famous people in Paris
 async function heatMap(map,year){
 	data = await getData(year)
-	var heat = L.heatLayer(coordinates(data.lat,data.long), {radius: 25}).addTo(map);
+	var heat = L.heatLayer(coordinates(data.lat,data.long), 
+					{maxZoom: 20, 
+					 radius: 25,
+					 minOpacity: 0
+				});
+	heat.addTo(map);
 }
 
 //Function to search in Wikipedia for more information on the people 
 function wikiSearch(name){
-	if (typeof name != "undefined"){
-		name = name.trim()
-	}
+	name = name_format(name)
 	//Url for the wiki search: name is the search term
-	var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ name +"&format=json&callback=?";
+	var url = "https://en.wikipedia.org/w/api.php?action=opensearch&search="+ name.replace(" ", "%20") +"&format=json&callback=?";
 
 	$.ajax({
 		url: url,
@@ -160,4 +165,36 @@ function coordinates(lat,long){
 		}
 	}
 	return coordinates
+}
+
+//Function to draw the Paris arrondissements on the map
+async function arrondissements(map){
+
+	const path = "data/arrondissements_Paris.csv"
+	const response = await fetch(path);
+	const data = await response.text();
+	const geometry = [];
+	const coordinates = [];
+	const rows = data.split('\n').slice(1);
+
+	rows.forEach(row => {
+		const start = row.indexOf("{");
+		const end = row.indexOf("}");
+		geometry.push(row.slice(start,end));
+	});
+	geometry.forEach(geom => {
+		const start = geom.indexOf("[");
+		coordinates.push(geom.slice(start).slice(1,geom.length-3));
+	});
+	coordinates.pop()
+	for (var i = 0; i < coordinates.length; i++) {
+		coordinates[i] = coordinates[i].replace("[","").split("],");
+		for (var j = 0; j < coordinates[i].length; j++) {
+			//console.log(j + ": " + coordinates[i][j])
+			coordinates[i][j] = coordinates[i][j].trim().slice(1);
+			coordinates[i][j] = [parseFloat(coordinates[i][j].split(",")[1]), parseFloat(coordinates[i][j].split(",")[0])]
+		}
+	}
+
+	L.polygon(coordinates, {color: 'red'}).addTo(map)
 }
