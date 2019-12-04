@@ -8,16 +8,17 @@
 	* heatMap()
 	* arrondissements()
 	* quartiers()
-	* wikiSearch()
-	* getData()
+
 
 -- UTILITARY FUNCTIONS --
 	
+	* getData()
 	* drawMarker()
+	* wikiSearch()
 	* popupContent()
 	* name_format()
 	* checkBounds()
-	* coordinates()
+	* parse_rows()
 */
 
 
@@ -29,7 +30,8 @@ var markers = L.markerClusterGroup({
 });
 const mymap = L.map('mapid').setView(L.latLng(paris_coord), 12.4);
 
-drawMap(1908, false, false, true, true);
+// set true/false to draw clusters, heatmap, arrondissements & neighborhoods
+drawMap(1884, false, true, false, false);
 
 // ---- MAIN FUNCTIONS ----
 
@@ -63,14 +65,10 @@ function drawMap(year, cluster = true, heatmap = false, arrs = false, quart = fa
 		heatMap(mymap,year)	
 	}
 	if (arrs){
-		arrondissements(mymap);
+		arrondissements(mymap, year); 
 	}
 	if (quart){
-		if (arrs){
-			quartiers(mymap, true);
-		} else {
-			quartiers(mymap);
-		}
+		quartiers(mymap);
 	}
 }
 
@@ -88,7 +86,13 @@ async function drawClusters(map, year){
 //Function to draw the heatmap to show the density of famous people in Paris
 async function heatMap(map,year){
 	data = await getData(year)
-	var heat = L.heatLayer(coordinates(data.lat,data.long), 
+	coordinates = []
+	for (var i = 0; i < data.lat.length; i++) {
+		if (checkBounds([data.lat[i],data.long[i]])){
+			coordinates.push([data.lat[i],data.long[i]])
+		}
+	}
+	var heat = L.heatLayer(coordinates, 
 					{maxZoom: 20, 
 					 radius: 25,
 					 minOpacity: 0
@@ -98,7 +102,7 @@ async function heatMap(map,year){
 
 //Function to draw the Paris arrondissements on the map
 //Data from: https://opendata.paris.fr/explore/dataset/arrondissements/information/?dataChart=eyJxdWVyaWVzIjpbeyJjb25maWciOnsiZGF0YXNldCI6ImFycm9uZGlzc2VtZW50cyIsIm9wdGlvbnMiOnsiYmFzZW1hcCI6Imphd2cuc3RyZWV0cyIsImxvY2F0aW9uIjoiMTIsNDguODUzMDgsMi4yNDk3OSJ9fSwiY2hhcnRzIjpbeyJhbGlnbk1vbnRoIjp0cnVlLCJ0eXBlIjoiY29sdW1uIiwiZnVuYyI6IkFWRyIsInlBeGlzIjoic3VyZmFjZSIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlLCJjb2xvciI6IiMwMDMzNjYifV0sInhBeGlzIjoibl9zcV9hciIsIm1heHBvaW50cyI6NTAsInNvcnQiOiIifV0sInRpbWVzY2FsZSI6IiIsImRpc3BsYXlMZWdlbmQiOnRydWUsImFsaWduTW9udGgiOnRydWV9&location=12,48.8515,2.32979&basemap=jawg.streets
-async function arrondissements(map){
+async function arrondissements(map, year){
 
 	const path = "data/arrondissements_Paris.csv"
 	const response = await fetch(path);
@@ -118,16 +122,47 @@ async function arrondissements(map){
 	//Parsing of the csv file to extract coordinates of the arrondissements
 	const coordinates = parse_rows(rows);
 
+	//Create polygons
+	var polygons = [];
+	for (var i = 0; i < coordinates.length; i++) {
+		polygons.push(L.polygon(coordinates[i], {color: 'red', fillOpacity: 0.2}));
+
+	}
+
+	/*
+	//Count the number of famous people within each arrondissement
+	const people = await getData(year)
+	var people_coord = []
+	for (var i = 0; i < people.lat.length; i++) {
+		if (checkBounds([people.lat[i],people.long[i]])){
+			people_coord.push([people.lat[i],people.long[i]])
+		}
+	}
+
+	counts = [];
+	for (var i = 0; i < coordinates.length; i++) {
+		var count = 0;
+		for (var j = 0; j < people.lat.length; j++) {
+			if (polygons[i].contains(people_coord[j])) {
+				count++;
+			}
+		}
+		counts.push(count);
+	}
+	*/
+	
 	//Draw the arrondissements as polygons
 	for (var i = 0; i < coordinates.length; i++) {
-		content = "<p><strong>N°: </strong> " + arr_number[i] + "<br /><strong>Name: </strong>" + arr_name[i] + "</p>"
-		L.polygon(coordinates[i], {color: 'red', fillOpacity: 0.05}).bindTooltip(content, {opacity: 0.9}).addTo(map);
+		content = "<p><strong>N°: </strong> " + arr_number[i].slice(0,arr_number[i].length-4) +
+				  "<br /><strong>Name: </strong>" + arr_name[i] + "</p>"
+				//  "<br /><strong>Number of famous people: </strong>" + counts[i] + "</p>"
+		polygons[i].bindTooltip(content, {opacity: 0.9}).addTo(map);
 	}
 }
 
 //Function to draw the Paris neighborhoods on the map
 //Data from: https://opendata.paris.fr/explore/dataset/quartier_paris/information/?location=12,48.88063,2.34695&basemap=jawg.streets
-async function quartiers(map, dashed = false){
+async function quartiers(map){
 
 	const path = "data/quartier_paris.csv"
 	const response = await fetch(path);
@@ -146,13 +181,41 @@ async function quartiers(map, dashed = false){
 	const coordinates = parse_rows(rows);
 
 	//Draw the arrondissements as polygons
-	dash_array = "0"
-	if (dashed){
-		dash_array = "15"
-	}
 	for (var i = 0; i < coordinates.length; i++) {
 		content = "<p><strong>Name: </strong>" + quart_name[i] + "</p>"
-		L.polygon(coordinates[i], {color: 'blue', fillOpacity: 0.05, dashArray: dash_array}).bindTooltip(content, {opacity: 0.9}).addTo(map);
+		L.polygon(coordinates[i], {color: 'blue', fillOpacity: 0.05}).bindTooltip(content, {opacity: 0.9}).addTo(map);
+	}
+}
+
+// ---- UTILITY FUNCTIONS ----
+
+//Function to parse the data in the csv file
+async function getData(year) {
+	const path = 'data/final_' + year + '.csv'
+	//console.log("Data from: " + path)
+	const response = await fetch(path);
+	const data = await response.text();
+	const addresses = [];
+	const names = [];
+	const lat = [];
+	const long = [];
+	const rows = data.split('\n').slice(1);
+	rows.forEach(row => {
+	  const cols = row.split(',');
+	  addresses.push(cols[0].trim());
+	  names.push(cols[1]); //Some names return undefined, so no trim() possible here!
+	  lat.push(parseFloat(cols[2]));
+	  long.push(parseFloat(cols[3]));
+	});
+	return { addresses, names, lat, long };
+}
+
+//Function to draw the markers
+function drawMarker(name,adr,lat,long){
+	if (checkBounds([lat,long])){	//Check if the address is in Paris
+		var marker = L.marker(new L.LatLng(lat, long));
+		marker.bindPopup(popupContent(name,adr));
+		markers.addLayer(marker);
 	}
 }
 
@@ -177,38 +240,6 @@ function wikiSearch(name){
 			console.log(status)
 		}
 	})
-}
-
-//Function to parse the data in the csv file
-async function getData(year) {
-	const path = 'data/final_' + year + '.csv'
-	//console.log("Data from: " + path)
-	const response = await fetch(path);
-	const data = await response.text();
-	const addresses = [];
-	const names = [];
-	const lat = [];
-	const long = [];
-	const rows = data.split('\n').slice(1);
-	rows.forEach(row => {
-	  const cols = row.split(',');
-	  addresses.push(cols[0].trim());
-	  names.push(cols[1]); //Some names return undefined, so no trim() possible here!
-	  lat.push(parseFloat(cols[2]));
-	  long.push(parseFloat(cols[3]));
-	});
-	return { addresses, names, lat, long };
-}
-
-// ---- UTILITY FUNCTIONS ----
-
-//Function to draw the markers
-function drawMarker(name,adr,lat,long){
-	if (checkBounds([lat,long])){	//Check if the address is in Paris
-		var marker = L.marker(new L.LatLng(lat, long));
-		marker.bindPopup(popupContent(name,adr));
-		markers.addLayer(marker);
-	}
 }
 
 //Function to create the content of the popups (ie relevant information on the person)
@@ -255,17 +286,6 @@ function checkBounds(people_coord){
 	}
 
 	return inParis;
-}
-
-//Function to combine lat & long into coordinates
-function coordinates(lat,long){
-	coordinates = []
-	for (var i = 0; i < lat.length; i++) {
-		if (checkBounds([lat[i],long[i]])){
-			coordinates.push([lat[i],long[i]])
-		}
-	}
-	return coordinates
 }
 
 //Function to extract coordinates from rows (used for quartiers() and arrondissements())
