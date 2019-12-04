@@ -5,12 +5,12 @@ var markers = L.markerClusterGroup({
 });
 const mymap = L.map('mapid').setView(L.latLng(paris_coord), 12.4);
 
-drawMap(1884, false, false);
+drawMap(1884, false, false, true);
 
 // ---- MAIN FUNCTIONS ----
 
 //Function to draw the map with the clusters
-function drawMap(year, cluster = true, heatmap = false){
+function drawMap(year, cluster = true, heatmap = false, arrs = false){
 	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
 		maxZoom: 20,
 		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
@@ -19,7 +19,7 @@ function drawMap(year, cluster = true, heatmap = false){
 		id: 'mapbox/streets-v11'
 	}).addTo(mymap);
 
-	arrondissements(mymap);
+	
 
 	//Overlay ancient map of Paris: https://github.com/kartena/leaflet-tilejson
 	//var imageUrl = 'http://www.lib.utexas.edu/maps/historical/newark_nj_1922.jpg',
@@ -30,6 +30,9 @@ function drawMap(year, cluster = true, heatmap = false){
 	}
 	if (heatmap){
 		heatMap(mymap,year)	
+	}
+	if (arrs){
+		arrondissements(mymap);
 	}
 }
 
@@ -116,7 +119,7 @@ function popupContent(name,adr){
 	if (typeof adr != "undefined"){
 		adr = adr.trim()
 	}
-	content = "<p><strong>Name:</strong> " + name + "<br /><strong>Address</strong>: " + adr + "</p>"
+	content = "<p><strong>Name: </strong>" + name + "<br /><strong>Address: </strong>" + adr + "</p>"
 	//link = ""
 	//wikiSearch(name)
 	//content = content + "<br /><strong>More info at</strong>: " + link
@@ -168,11 +171,14 @@ function coordinates(lat,long){
 }
 
 //Function to draw the Paris arrondissements on the map
+//Data from: https://opendata.paris.fr/explore/dataset/arrondissements/information/?dataChart=eyJxdWVyaWVzIjpbeyJjb25maWciOnsiZGF0YXNldCI6ImFycm9uZGlzc2VtZW50cyIsIm9wdGlvbnMiOnsiYmFzZW1hcCI6Imphd2cuc3RyZWV0cyIsImxvY2F0aW9uIjoiMTIsNDguODUzMDgsMi4yNDk3OSJ9fSwiY2hhcnRzIjpbeyJhbGlnbk1vbnRoIjp0cnVlLCJ0eXBlIjoiY29sdW1uIiwiZnVuYyI6IkFWRyIsInlBeGlzIjoic3VyZmFjZSIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlLCJjb2xvciI6IiMwMDMzNjYifV0sInhBeGlzIjoibl9zcV9hciIsIm1heHBvaW50cyI6NTAsInNvcnQiOiIifV0sInRpbWVzY2FsZSI6IiIsImRpc3BsYXlMZWdlbmQiOnRydWUsImFsaWduTW9udGgiOnRydWV9&location=12,48.8515,2.32979&basemap=jawg.streets
 async function arrondissements(map){
 
 	const path = "data/arrondissements_Paris.csv"
 	const response = await fetch(path);
 	const data = await response.text();
+	const arr_number = [];
+	const arr_name = [];
 	const geometry = [];
 	const coordinates = [];
 	const rows = data.split('\n').slice(1);
@@ -181,12 +187,16 @@ async function arrondissements(map){
 		const start = row.indexOf("{");
 		const end = row.indexOf("}");
 		geometry.push(row.slice(start,end));
+		arr_number.push(row.split(";")[3]);
+		arr_name.push(row.split(";")[4]);
 	});
 	geometry.forEach(geom => {
 		const start = geom.indexOf("[");
 		coordinates.push(geom.slice(start).slice(1,geom.length-3));
 	});
-	coordinates.pop()
+	coordinates.pop();
+	arr_number.pop();
+	arr_name.pop();
 	for (var i = 0; i < coordinates.length; i++) {
 		coordinates[i] = coordinates[i].replace("[","").split("],");
 		for (var j = 0; j < coordinates[i].length; j++) {
@@ -196,5 +206,8 @@ async function arrondissements(map){
 		}
 	}
 
-	L.polygon(coordinates, {color: 'red'}).addTo(map)
+	for (var i = 0; i < coordinates.length; i++) {
+		content = "<p><strong>N°: </strong> " + arr_number[i] + "<br /><strong>Name: </strong>" + arr_name[i] + "</p>"
+		L.polygon(coordinates[i], {color: 'red'}).bindTooltip(content).addTo(map);
+	}
 }
