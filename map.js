@@ -18,6 +18,7 @@
 	* name_format()
 	* checkBounds()
 	* parse_rows()
+	* getColor()
 */
 
 //Global variables
@@ -178,7 +179,7 @@ async function arrondissements(year){
 	}
 
 	for (var i = 0; i < polygons.length; i++) {
-		polygons[i].setStyle({fillColor: getColor(counts[i])});
+		polygons[i].setStyle({fillColor: getColor(counts[i],counts)});
 	}
 
 	//Add Tooltip content
@@ -250,7 +251,7 @@ async function quartiers(year){
 	}
 
 	for (var i = 0; i < polygons.length; i++) {
-		polygons[i].setStyle({fillColor: getColor(counts[i])});
+		polygons[i].setStyle({fillColor: getColor(counts[i],counts)});
 	}
 
 	//Add Tooltip content
@@ -260,7 +261,7 @@ async function quartiers(year){
 		polygons[i].bindTooltip(content, {opacity: 0.9});
 	}
 
-
+	console.log(counts)
 	return polygons;
 }
 
@@ -391,9 +392,10 @@ function getColor(d) {
 }
 */
 
-function getColor(d) {
-    return d > 1500 ? 'red' :
-    	   d > 1000 ? 'orange' :
-           d > 500  ? 'lime' :
+function getColor(d, all) {
+	var prop = 100*d/Math.max(...all);
+    return prop > 50 ? 'red' :
+    	   prop > 25 ? 'orange' :
+           prop > 5  ? 'lime' :
                       'blue';
 }
