@@ -4,7 +4,7 @@
 -- MAIN FUNCTIONS --
 
 	* drawMap()
-	* drawClusters()
+	* famous_people()
 	* heatMap()
 	* arrondissements()
 	* quartiers()
@@ -13,7 +13,6 @@
 -- UTILITARY FUNCTIONS --
 	
 	* getData()
-	* drawMarker()
 	* wikiSearch()
 	* popupContent()
 	* name_format()
@@ -25,8 +24,7 @@
 const paris_coord = [48.864716, 2.349014];
 const mymap = L.map('mapid').setView(L.latLng(paris_coord), 12.4);
 
-// set true/false to draw clusters, heatmap, arrondissements & neighborhoods
-drawMap(1884);
+drawMap(1908);
 
 // ---- MAIN FUNCTIONS ----
 
@@ -56,9 +54,16 @@ async function drawMap(year){
     //imageBounds = [[47, 2], [49, 3]];
 	//L.imageOverlay(imageUrl, imageBounds).addTo(mymap);
 
-	var people_Layer = await drawClusters(year);
+	var people = await famous_people(year);
+	var people_Layer = L.layerGroup(people);
 
-	var density_Layer = await heatMap(year);
+	var clusters_Layer = L.markerClusterGroup({
+		singleMarkerMode: true //Show single elements as clusters of size 1
+	});
+	clusters_Layer.addLayers(people);
+
+	var density_Layer_1884 = await heatMap(1884);
+	var density_Layer_1908 = await heatMap(1908);
 
 	var arr = await arrondissements();
 	var arr_Layer = L.layerGroup(arr);
@@ -68,19 +73,19 @@ async function drawMap(year){
 
 	var overlayMap = {
 		"People": people_Layer,
-		"Density": density_Layer,
-		"Arrondissements": arr_Layer,
-		"Neighborhoods": quart_Layer
+		"Clusters": clusters_Layer,
+		"Density (1884)": density_Layer_1884,
+		"Density (1908)": density_Layer_1908,
+		"<span style='color: red'>Arrondissements</span>": arr_Layer,
+		"<span style='color: blue'>Neighborhoods</span>": quart_Layer
 	}
 
 	L.control.layers(baseMap, overlayMap).addTo(mymap);
 }
 
 //Function to draw the clusters
-async function drawClusters(year){
-	var markers = L.markerClusterGroup({
-		singleMarkerMode: true //Show single elements as clusters of size 1
-	});
+async function famous_people(year){
+	var markers = [];
 	data = await getData(year);
 	for (var i = 0; i < data.lat.length; i++) {
 		var lat = data.lat[i];
@@ -90,7 +95,7 @@ async function drawClusters(year){
 		if (checkBounds([lat,long])){	//Check if the address is in Paris
 			var marker = L.marker(new L.LatLng(lat, long));
 			marker.bindPopup(popupContent(name,adr));
-			markers.addLayer(marker);
+			markers.push(marker);
 		}	
 	}
 	
@@ -106,10 +111,17 @@ async function heatMap(year){
 			coordinates.push([data.lat[i],data.long[i]])
 		}
 	}
+	if (year == 1884){
+		grad = {0.4: 'yellow', 0.65: 'orange', 1: 'red'};
+	}
+	if (year == 1908){
+		grad = {0.4: 'green', 0.65: 'lime', 1: 'blue'};
+	}
 	var heat = L.heatLayer(coordinates, 
 					{maxZoom: 20, 
 					 radius: 25,
-					 minOpacity: 0
+					 minOpacity: 0,
+					 gradient: grad
 				});
 
 	return heat;
