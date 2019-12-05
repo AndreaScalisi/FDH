@@ -22,7 +22,7 @@
 
 //Global variables
 const paris_coord = [48.864716, 2.349014];
-const mymap = L.map('mapid').setView(L.latLng(paris_coord), 12.4);
+const mymap = L.map('mapid', {minZoom: 12}).setView(L.latLng(paris_coord), 12);
 
 drawMap(1908);
 
@@ -45,6 +45,7 @@ async function drawMap(year){
 	}
 
 	streets.addTo(mymap);
+
 
 	//Use TileLayer.WMS to add the georeferenced map (need WMS of the georeferenced map!): https://leafletjs.com/reference-1.6.0.html#tilelayer-wms
 		//See tutorial here: https://leafletjs.com/examples/wms/wms.html
