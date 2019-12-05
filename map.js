@@ -4,7 +4,7 @@
 -- MAIN FUNCTIONS --
 
 	* drawMap()
-	* drawClusters()
+	* famous_people()
 	* heatMap()
 	* arrondissements()
 	* quartiers()
@@ -13,7 +13,6 @@
 -- UTILITARY FUNCTIONS --
 	
 	* getData()
-	* drawMarker()
 	* wikiSearch()
 	* popupContent()
 	* name_format()
@@ -21,34 +20,32 @@
 	* parse_rows()
 */
 
-
-
 //Global variables
 const paris_coord = [48.864716, 2.349014];
-var markers = L.markerClusterGroup({
-	singleMarkerMode: true //Show single elements as clusters of size 1
-});
-const mymap = L.map('mapid').setView(L.latLng(paris_coord), 12.4);
+const mymap = L.map('mapid', {minZoom: 12}).setView(L.latLng(paris_coord), 12);
 
-// set true/false to draw clusters, heatmap, arrondissements & neighborhoods
-drawMap(1884, false, true, false, false);
+drawMap(1908);
 
 // ---- MAIN FUNCTIONS ----
 
 //Function to draw the map with the clusters
-function drawMap(year, cluster = true, heatmap = false, arrs = false, quart = false, style_id = 'mapbox/streets-v11'){
-	L.tileLayer('https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw', {
-		maxZoom: 20,
-		attribution: 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
+async function drawMap(year){
+	var mapboxUrl = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
+	var mapboxAttribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
 		'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
-		'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>',
-		id: style_id
-	}).addTo(mymap);
+		'Imagery © <a href="https://www.mapbox.com/">Mapbox</a>';
+	var streets = L.tileLayer(mapboxUrl, {maxZoom: 20, attribution: mapboxAttribution, id: 'mapbox/streets-v11'})
+	var light = L.tileLayer(mapboxUrl, {maxZoom: 20, attribution: mapboxAttribution, id: 'mapbox/light-v10'})
+	var dark = L.tileLayer(mapboxUrl, {maxZoom: 20, attribution: mapboxAttribution, id: 'mapbox/dark-v10'})
 
-	//Other possible styles:
-		//mapbox/streets-v11
-		//mapbox/light-v10
-		//mapbox/dark-v10
+	var baseMap = {
+		"Streets": streets,
+		"Light": light,
+		"Dark": dark
+	}
+
+	streets.addTo(mymap);
+
 
 	//Use TileLayer.WMS to add the georeferenced map (need WMS of the georeferenced map!): https://leafletjs.com/reference-1.6.0.html#tilelayer-wms
 		//See tutorial here: https://leafletjs.com/examples/wms/wms.html
@@ -58,33 +55,56 @@ function drawMap(year, cluster = true, heatmap = false, arrs = false, quart = fa
     //imageBounds = [[47, 2], [49, 3]];
 	//L.imageOverlay(imageUrl, imageBounds).addTo(mymap);
 
-	if (cluster){
-		drawClusters(mymap, year);
+	var people = await famous_people(year);
+	var people_Layer = L.layerGroup(people);
+
+	var clusters_Layer = L.markerClusterGroup({
+		singleMarkerMode: true //Show single elements as clusters of size 1
+	});
+	clusters_Layer.addLayers(people);
+
+	var density_Layer_1884 = await heatMap(1884);
+	var density_Layer_1908 = await heatMap(1908);
+
+	var arr = await arrondissements();
+	var arr_Layer = L.layerGroup(arr);
+
+	var quart = await quartiers();
+	var quart_Layer = L.layerGroup(quart);
+
+	var overlayMap = {
+		"People": people_Layer,
+		"Clusters": clusters_Layer,
+		"Density (1884)": density_Layer_1884,
+		"Density (1908)": density_Layer_1908,
+		"<span style='color: red'>Arrondissements</span>": arr_Layer,
+		"<span style='color: blue'>Neighborhoods</span>": quart_Layer
 	}
-	if (heatmap){
-		heatMap(mymap,year)	
-	}
-	if (arrs){
-		arrondissements(mymap, year); 
-	}
-	if (quart){
-		quartiers(mymap);
-	}
+
+	L.control.layers(baseMap, overlayMap).addTo(mymap);
 }
 
 //Function to draw the clusters
-async function drawClusters(map, year){
+async function famous_people(year){
+	var markers = [];
 	data = await getData(year);
 	for (var i = 0; i < data.lat.length; i++) {
-		drawMarker(data.names[i],data.addresses[i],data.lat[i],data.long[i]);
+		var lat = data.lat[i];
+		var long = data.long[i];
+		var name = data.names[i];
+		var adr = data.addresses[i];
+		if (checkBounds([lat,long])){	//Check if the address is in Paris
+			var marker = L.marker(new L.LatLng(lat, long));
+			marker.bindPopup(popupContent(name,adr));
+			markers.push(marker);
+		}	
 	}
 	
-	map.addLayer(markers);
+	return markers;
 }
 
-
 //Function to draw the heatmap to show the density of famous people in Paris
-async function heatMap(map,year){
+async function heatMap(year){
 	data = await getData(year)
 	coordinates = []
 	for (var i = 0; i < data.lat.length; i++) {
@@ -92,17 +112,25 @@ async function heatMap(map,year){
 			coordinates.push([data.lat[i],data.long[i]])
 		}
 	}
+	if (year == 1884){
+		grad = {0.4: 'yellow', 0.65: 'orange', 1: 'red'};
+	}
+	if (year == 1908){
+		grad = {0.4: 'green', 0.65: 'lime', 1: 'blue'};
+	}
 	var heat = L.heatLayer(coordinates, 
 					{maxZoom: 20, 
 					 radius: 25,
-					 minOpacity: 0
+					 minOpacity: 0,
+					 gradient: grad
 				});
-	heat.addTo(map);
+
+	return heat;
 }
 
 //Function to draw the Paris arrondissements on the map
 //Data from: https://opendata.paris.fr/explore/dataset/arrondissements/information/?dataChart=eyJxdWVyaWVzIjpbeyJjb25maWciOnsiZGF0YXNldCI6ImFycm9uZGlzc2VtZW50cyIsIm9wdGlvbnMiOnsiYmFzZW1hcCI6Imphd2cuc3RyZWV0cyIsImxvY2F0aW9uIjoiMTIsNDguODUzMDgsMi4yNDk3OSJ9fSwiY2hhcnRzIjpbeyJhbGlnbk1vbnRoIjp0cnVlLCJ0eXBlIjoiY29sdW1uIiwiZnVuYyI6IkFWRyIsInlBeGlzIjoic3VyZmFjZSIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlLCJjb2xvciI6IiMwMDMzNjYifV0sInhBeGlzIjoibl9zcV9hciIsIm1heHBvaW50cyI6NTAsInNvcnQiOiIifV0sInRpbWVzY2FsZSI6IiIsImRpc3BsYXlMZWdlbmQiOnRydWUsImFsaWduTW9udGgiOnRydWV9&location=12,48.8515,2.32979&basemap=jawg.streets
-async function arrondissements(map, year){
+async function arrondissements(){
 
 	const path = "data/arrondissements_Paris.csv"
 	const response = await fetch(path);
@@ -125,9 +153,13 @@ async function arrondissements(map, year){
 	//Create polygons
 	var polygons = [];
 	for (var i = 0; i < coordinates.length; i++) {
-		polygons.push(L.polygon(coordinates[i], {color: 'red', fillOpacity: 0.2}));
-
+		content = "<p><strong>N°: </strong> " + arr_number[i].slice(0,arr_number[i].length-4) +
+				  "<br /><strong>Name: </strong>" + arr_name[i] + "</p>"
+				//  "<br /><strong>Number of famous people: </strong>" + counts[i] + "</p>"		
+		polygons.push(L.polygon(coordinates[i], {color: 'red', fillOpacity: 0.1}).bindTooltip(content, {opacity: 0.9}));
 	}
+
+	return polygons;	
 
 	/*
 	//Count the number of famous people within each arrondissement
@@ -150,19 +182,11 @@ async function arrondissements(map, year){
 		counts.push(count);
 	}
 	*/
-	
-	//Draw the arrondissements as polygons
-	for (var i = 0; i < coordinates.length; i++) {
-		content = "<p><strong>N°: </strong> " + arr_number[i].slice(0,arr_number[i].length-4) +
-				  "<br /><strong>Name: </strong>" + arr_name[i] + "</p>"
-				//  "<br /><strong>Number of famous people: </strong>" + counts[i] + "</p>"
-		polygons[i].bindTooltip(content, {opacity: 0.9}).addTo(map);
-	}
 }
 
 //Function to draw the Paris neighborhoods on the map
 //Data from: https://opendata.paris.fr/explore/dataset/quartier_paris/information/?location=12,48.88063,2.34695&basemap=jawg.streets
-async function quartiers(map){
+async function quartiers(){
 
 	const path = "data/quartier_paris.csv"
 	const response = await fetch(path);
@@ -180,11 +204,14 @@ async function quartiers(map){
 	//Parsing of the csv file to extract coordinates of the arrondissements
 	const coordinates = parse_rows(rows);
 
-	//Draw the arrondissements as polygons
+	//Create polygons
+	var polygons = [];
 	for (var i = 0; i < coordinates.length; i++) {
 		content = "<p><strong>Name: </strong>" + quart_name[i] + "</p>"
-		L.polygon(coordinates[i], {color: 'blue', fillOpacity: 0.05}).bindTooltip(content, {opacity: 0.9}).addTo(map);
+		polygons.push((L.polygon(coordinates[i], {color: 'blue', fillOpacity: 0.05}).bindTooltip(content, {opacity: 0.9})));
 	}
+
+	return polygons;
 }
 
 // ---- UTILITY FUNCTIONS ----
@@ -208,15 +235,6 @@ async function getData(year) {
 	  long.push(parseFloat(cols[3]));
 	});
 	return { addresses, names, lat, long };
-}
-
-//Function to draw the markers
-function drawMarker(name,adr,lat,long){
-	if (checkBounds([lat,long])){	//Check if the address is in Paris
-		var marker = L.marker(new L.LatLng(lat, long));
-		marker.bindPopup(popupContent(name,adr));
-		markers.addLayer(marker);
-	}
 }
 
 //Function to search in Wikipedia for more information on the people 
