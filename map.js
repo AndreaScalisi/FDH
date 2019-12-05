@@ -22,15 +22,16 @@
 */
 
 //Global variables
-const paris_coord = [48.864716, 2.349014];
-const mymap = L.map('mapid', {minZoom: 12}).setView(L.latLng(paris_coord), 12);
 
-drawMap(1908);
+const paris_coord = [48.864716, 2.349014];
+drawMap(1884);
 
 // ---- MAIN FUNCTIONS ----
 
 //Function to draw the map with the clusters
-async function drawMap(year){
+async function drawMap(year, stored = true){
+	const mymap = L.map('mapid', {minZoom: 12}).setView(L.latLng(paris_coord), 12);
+
 	var mapboxUrl = "https://api.mapbox.com/styles/v1/{id}/tiles/{z}/{x}/{y}?access_token=pk.eyJ1IjoibWFwYm94IiwiYSI6ImNpejY4NXVycTA2emYycXBndHRqcmZ3N3gifQ.rJcFIG214AriISLbB6B5aw";
 	var mapboxAttribution = 'Map data &copy; <a href="https://www.openstreetmap.org/">OpenStreetMap</a> contributors, ' +
 		'<a href="https://creativecommons.org/licenses/by-sa/2.0/">CC-BY-SA</a>, ' +
@@ -39,10 +40,22 @@ async function drawMap(year){
 	var light = L.tileLayer(mapboxUrl, {maxZoom: 20, attribution: mapboxAttribution, id: 'mapbox/light-v10'})
 	var dark = L.tileLayer(mapboxUrl, {maxZoom: 20, attribution: mapboxAttribution, id: 'mapbox/dark-v10'})
 
+	var url_1908 = "";
+	var Map_1908 = L.tileLayer(url_1908);
+
+	var url_1884 = "";
+	var Map_1884 = L.tileLayer(url_1884);
+
+	//var url_test = "https://exports.georeferencer.com/494969140585-2019-11-05T12:33:57.956925Z.tif";
+	//var test = L.leafletGeotiff('data/carte_test.tif');
+	//test.addTo(mymap);
+
 	var baseMap = {
 		"Streets": streets,
 		"Light": light,
-		"Dark": dark
+		"Dark": dark,
+		"Map of 1884": Map_1884,
+		"Map of 1908": Map_1908,
 	}
 
 	streets.addTo(mymap);
@@ -60,17 +73,17 @@ async function drawMap(year){
 	var people_Layer = L.layerGroup(people);
 
 	var clusters_Layer = L.markerClusterGroup({
-		singleMarkerMode: true //Show single elements as clusters of size 1
+		singleMarkerMode: false //Show single elements as clusters of size 1
 	});
 	clusters_Layer.addLayers(people);
 
 	var density_Layer_1884 = await heatMap(1884);
 	var density_Layer_1908 = await heatMap(1908);
 
-	var arr = await arrondissements(year);
+	var arr = await arrondissements(mymap, year, stored);
 	var arr_Layer = L.layerGroup(arr);
 
-	var quart = await quartiers(year);
+	var quart = await quartiers(mymap, year, stored);
 	var quart_Layer = L.layerGroup(quart);
 
 	var overlayMap = {
@@ -78,8 +91,8 @@ async function drawMap(year){
 		"Clusters": clusters_Layer,
 		"Density (1884)": density_Layer_1884,
 		"Density (1908)": density_Layer_1908,
-		"<span style='color: red'>Arrondissements</span>": arr_Layer,
-		"<span style='color: blue'>Neighborhoods</span>": quart_Layer
+		"Arrondissements": arr_Layer,
+		"Neighborhoods": quart_Layer
 	}
 
 	L.control.layers(baseMap, overlayMap).addTo(mymap);
@@ -131,9 +144,9 @@ async function heatMap(year){
 
 //Function to draw the Paris arrondissements on the map
 //Data from: https://opendata.paris.fr/explore/dataset/arrondissements/information/?dataChart=eyJxdWVyaWVzIjpbeyJjb25maWciOnsiZGF0YXNldCI6ImFycm9uZGlzc2VtZW50cyIsIm9wdGlvbnMiOnsiYmFzZW1hcCI6Imphd2cuc3RyZWV0cyIsImxvY2F0aW9uIjoiMTIsNDguODUzMDgsMi4yNDk3OSJ9fSwiY2hhcnRzIjpbeyJhbGlnbk1vbnRoIjp0cnVlLCJ0eXBlIjoiY29sdW1uIiwiZnVuYyI6IkFWRyIsInlBeGlzIjoic3VyZmFjZSIsInNjaWVudGlmaWNEaXNwbGF5Ijp0cnVlLCJjb2xvciI6IiMwMDMzNjYifV0sInhBeGlzIjoibl9zcV9hciIsIm1heHBvaW50cyI6NTAsInNvcnQiOiIifV0sInRpbWVzY2FsZSI6IiIsImRpc3BsYXlMZWdlbmQiOnRydWUsImFsaWduTW9udGgiOnRydWV9&location=12,48.8515,2.32979&basemap=jawg.streets
-async function arrondissements(year){
+async function arrondissements(map, year, stored){
 
-	const path = "data/arrondissements_Paris.csv"
+	const path = "data/Polygons/arrondissements_Paris.csv"
 	const response = await fetch(path);
 	const data = await response.text();
 	const arr_number = [];
@@ -154,30 +167,39 @@ async function arrondissements(year){
 	//Create polygons
 	var polygons = [];
 	for (var i = 0; i < coordinates.length; i++) {	
-		polygons.push(L.polygon(coordinates[i], {fillOpacity: 0.4}));
+		polygons.push(L.polygon(coordinates[i], {fillOpacity: 0.4, color: 'white', dashArray: '4'}));
 	}
 
-	//Count the number of famous people within each arrondissement
-	const people = await getData(year)
-	var people_coord = []
-	for (var i = 0; i < people.lat.length; i++) {
-		if (checkBounds([people.lat[i],people.long[i]])){
-			people_coord.push([people.lat[i],people.long[i]])
-		}
-	}
-
-	counts = [];
-	for (var i = 0; i < coordinates.length; i++) {
-		var count = 0;
-		for (var j = 0; j < people_coord.length; j++) {
-			//console.log(people_coord[j])
-			if (polygons[i].contains(new L.latLng(people_coord[j]))) {
-				count++;
+	//Count the number of famous people within each arrondissement (if stored, read directly in .csv file)
+	var counts = [];
+	if (stored){
+		const path_ = "data/Polygons/arr_counts_" + year + ".csv";
+		const response = await fetch(path_);
+		const data = await response.text();
+		data.split(",").forEach(count => {
+			counts.push(parseFloat(count));
+		})
+	} else {
+		const people = await getData(year)
+		var people_coord = []
+		for (var i = 0; i < people.lat.length; i++) {
+			if (checkBounds([people.lat[i],people.long[i]])){
+				people_coord.push([people.lat[i],people.long[i]])
 			}
 		}
-		counts.push(count);
+
+		for (var i = 0; i < coordinates.length; i++) {
+			var count = 0;
+			for (var j = 0; j < people_coord.length; j++) {
+				if (polygons[i].contains(new L.latLng(people_coord[j]))) {
+					count++;
+				}
+			}
+			counts.push(count);
+		}
 	}
 
+	//Color polygons given number of famous people inside
 	for (var i = 0; i < polygons.length; i++) {
 		polygons[i].setStyle({fillColor: getColor(counts[i],counts)});
 	}
@@ -190,15 +212,31 @@ async function arrondissements(year){
 		polygons[i].bindTooltip(content, {opacity: 0.9});
 	}
 
+	//Add legend
+	var legend = L.control({position: 'bottomright'});
+	legend.onAdd = function (map) {
+	    var div = L.DomUtil.create('div', 'info legend'),
+	        grades = [4, 15, 25, 50],
+	        labels = [];
+
+	    // loop through our density intervals and generate a label with a colored square for each interval
+	    for (var i = 0; i < grades.length; i++) {
+	        div.innerHTML +=
+	            '<i style="background:' + getColor(grades[i] + 1, counts) + '"></i> ' +
+	            grades[i] + (grades[i + 1] ? '&ndash;' + grades[i + 1] + '<br>' : '+');
+	    }
+	    return div;
+	}
+
 	return polygons;	
 
 }
 
 //Function to draw the Paris neighborhoods on the map
 //Data from: https://opendata.paris.fr/explore/dataset/quartier_paris/information/?location=12,48.88063,2.34695&basemap=jawg.streets
-async function quartiers(year){
+async function quartiers(map, year, stored){
 
-	const path = "data/quartier_paris.csv"
+	const path = "data/Polygons/quartier_paris.csv"
 	const response = await fetch(path);
 	const data = await response.text();
 	const quart_number = [];
@@ -211,43 +249,42 @@ async function quartiers(year){
 	});	
 	quart_name.pop();
 
-	//Parsing of the csv file to extract coordinates of the arrondissements
+	//Parsing of the csv file to extract coordinates of the neighborhoods
 	const coordinates = parse_rows(rows);
-
-	/*
-	//Create polygons
-	var polygons = [];
-	for (var i = 0; i < coordinates.length; i++) {
-		content = "<p><strong>Name: </strong>" + quart_name[i] + "</p>"
-		polygons.push((L.polygon(coordinates[i], {color: 'blue', fillOpacity: 0.05}).bindTooltip(content, {opacity: 0.9})));
-	}
-	*/
 
 	//Create polygons
 	var polygons = [];
 	for (var i = 0; i < coordinates.length; i++) {	
-		polygons.push(L.polygon(coordinates[i], {fillOpacity: 0.4}));
+		polygons.push(L.polygon(coordinates[i], {fillOpacity: 0.4, color: 'white', dashArray: '4'}));
 	}
 
-	//Count the number of famous people within each arrondissement
-	const people = await getData(year)
-	var people_coord = []
-	for (var i = 0; i < people.lat.length; i++) {
-		if (checkBounds([people.lat[i],people.long[i]])){
-			people_coord.push([people.lat[i],people.long[i]])
-		}
-	}
-
-	counts = [];
-	for (var i = 0; i < coordinates.length; i++) {
-		var count = 0;
-		for (var j = 0; j < people_coord.length; j++) {
-			//console.log(people_coord[j])
-			if (polygons[i].contains(new L.latLng(people_coord[j]))) {
-				count++;
+	//Count the number of famous people within each neighborhoods (if stored, read directly in .csv file)
+	var counts = [];
+	if (stored){
+		const path_ = "data/Polygons/quartiers_counts_" + year + ".csv";
+		const response = await fetch(path_);
+		const data = await response.text();
+		data.split(",").forEach(count => {
+			counts.push(parseFloat(count));
+		})
+	} else {
+		const people = await getData(year)
+		var people_coord = []
+		for (var i = 0; i < people.lat.length; i++) {
+			if (checkBounds([people.lat[i],people.long[i]])){
+				people_coord.push([people.lat[i],people.long[i]])
 			}
 		}
-		counts.push(count);
+
+		for (var i = 0; i < coordinates.length; i++) {
+			var count = 0;
+			for (var j = 0; j < people_coord.length; j++) {
+				if (polygons[i].contains(new L.latLng(people_coord[j]))) {
+					count++;
+				}
+			}
+			counts.push(count);
+		}
 	}
 
 	for (var i = 0; i < polygons.length; i++) {
@@ -261,7 +298,6 @@ async function quartiers(year){
 		polygons[i].bindTooltip(content, {opacity: 0.9});
 	}
 
-	console.log(counts)
 	return polygons;
 }
 
@@ -383,19 +419,11 @@ function parse_rows(rows){
 }
 
 //Function to choose fillColor of polygons as function of number of people inside
-/*
-function getColor(d) {
-    return d > 1500 ? '#edf8fb' :
-    	   d > 1000 ? '#b2e2e2' :
-           d > 500  ? '#66c2a4' :
-                      '##238b45';
-}
-*/
-
 function getColor(d, all) {
 	var prop = 100*d/Math.max(...all);
     return prop > 50 ? 'red' :
     	   prop > 25 ? 'orange' :
-           prop > 5  ? 'lime' :
-                      'blue';
+           prop > 15 ? 'lime' :
+           prop > 4 ? 'blue':
+           			  'grey'
 }
